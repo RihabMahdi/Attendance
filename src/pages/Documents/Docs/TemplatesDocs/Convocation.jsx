@@ -1,9 +1,9 @@
 import React from 'react';
 import { Building2, Calendar, User, Users2 } from 'lucide-react';
 
-const Convocation = ({ name, date, group }) => {
+const Convocation = ({ name, date, filiere, group }) => {
   return (
-    <div className="bg-white p-8 w-[210mm] h-[297mm] mx-auto">
+    <div className="bg-white p-8 w-[210mm] h-[297mm] mx-auto ">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center">
           <img
@@ -33,7 +33,13 @@ const Convocation = ({ name, date, group }) => {
 
             <div className="flex items-center space-x-4 p-3  rounded-lg">
               <Users2 className="w-5 h-5 text-gray-600" />
-              <span className="font-semibold w-48">Filière & Groupe:</span>
+              <span className="font-semibold w-48">Filiére:</span>
+              <span className="flex-1">{filiere?.toUpperCase()}</span>
+            </div>
+
+            <div className="flex items-center space-x-4 p-3  rounded-lg">
+              <Users2 className="w-5 h-5 text-gray-600" />
+              <span className="font-semibold w-48">Groupe:</span>
               <span className="flex-1">{group.toUpperCase()}</span>
             </div>
 
@@ -66,7 +72,7 @@ const Convocation = ({ name, date, group }) => {
                 'Le non-respect des consignes',
               ].map((item, index) => (
                 <li key={index} className="flex items-center p-3 rounded-lg">
-                  <div className="w-4 h-4  rounded border border-gray-600 mr-3"></div>
+                  <div className="w-4 h-4  rounded-sm border border-gray-600 mr-3"></div>
                   {item}
                 </li>
               ))}
@@ -75,7 +81,7 @@ const Convocation = ({ name, date, group }) => {
               {["L'insubordination", 'La négligence', 'Le non-respect du règlement'].map(
                 (item, index) => (
                   <li key={index} className="flex items-center p-3 rounded-lg">
-                    <div className="w-4 h-4  rounded border border-gray-600 mr-3"></div>
+                    <div className="w-4 h-4  rounded-sm border border-gray-600 mr-3"></div>
                     {item}
                   </li>
                 )

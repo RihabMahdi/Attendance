@@ -43,17 +43,17 @@ To learn more about the tools used in this project:
 
 ## Accounts for testing
 ### Super User
-Email: alice.smith@example.com
+Email: amina.smaili@example.com
 Password: SuperUser123!
 
 ### Admin
-Email: bob.johnson@example.com
+Email: boubker.el-jouhari@example.com
 Password: AdminSecure456!
 
 ### Trainer
-Email: carlos.martinez@example.com
+Email: khalid.merzouki@example.com
 Password: Trainer789!
 
 ### Trainee
-Email: diana.lee@example.com
+Email: dalila.lahlou@example.com
 Password: Trainee101!

@@ -40,7 +40,7 @@ const DataTable = ({
   if (!data || data.length === 0) {
     const { icon: Icon, title, description } = emptyStateProps;
     return (
-      <div className="card bg-base-100 shadow">
+      <div className="card bg-base-100 shadow-sm">
         <div className="card-body items-center text-center py-8">
           <Icon className="w-12 h-12 text-base-content/50 mb-2" />
           <h3 className="text-lg font-semibold">{title}</h3>

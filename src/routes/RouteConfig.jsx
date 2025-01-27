@@ -4,10 +4,12 @@ import PublicRoute from './PublicRoute';
 import ProtectedRoute from './ProtectedRoute';
 import DashboardLayout from '../layout/DashboardLayout';
 import routes from './routes';
+import LandingPage from '../pages/Landing/LandingPage';
 
 const RouteConfig = () => {
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       {routes.map(({ path, element: Element, isPublic, allowedRoles }) => {
         if (isPublic) {
           return (

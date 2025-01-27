@@ -5,7 +5,7 @@ const FormInput = ({ label, type = 'text', ...props }) => (
     <label className="text-lg font-semibold text-gray-400">{label}</label>
     <input
       type={type}
-      className="w-full bg-transparent px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+      className="w-full bg-transparent px-3 py-2 border border-gray-400 rounded-md focus:outline-hidden focus:ring-1 focus:ring-indigo-500"
       {...props}
     />
   </div>

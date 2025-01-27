@@ -56,7 +56,7 @@ const SecteursPage = () => {
       {/* Modal for Adding/Editing/View */}
       <SecteursModal
         isOpen={isModalOpen}
-        mode={selectedSecteur === null ? 'create' : (viewMode ? 'view' : 'edit')}
+        mode={selectedSecteur === null ? 'create' : viewMode ? 'view' : 'edit'}
         secteur={selectedSecteur}
         onClose={handleModalClose}
         onSave={handleSave}

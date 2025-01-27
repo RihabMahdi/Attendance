@@ -23,7 +23,7 @@ export default function AssignmentModal() {
     selectedGroupe,
     selectedFormateur,
     salles,
-    startOfWeek 
+    startOfWeek,
   } = useSelector((state) => state.scheduler);
 
   const timeSlots = hours.flatMap((hour) => hour.subHours);
@@ -290,29 +290,29 @@ export default function AssignmentModal() {
             renderFields()
           ) : (
             <>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      Day
-                    </span>
-                  </label>
-                  <select
-                    value={assignmentData.day}
-                    onChange={(e) => setAssignmentData({ ...assignmentData, day: e.target.value })}
-                    className="select select-bordered w-full"
-                    required
-                  >
-                    <option value="">Select Day</option>
-                    {Array.from({ length: 6 }, (_, i) => {
-                      const date = dayjs(startOfWeek).add(i, 'day');
-                      return (
-                        <option key={i} value={date.format('YYYY-MM-DD')}>
-                          {date.format('dddd, D MMM')}
-                        </option>
-                      );
-                    })}
-                  </select>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Day
+                  </span>
+                </label>
+                <select
+                  value={assignmentData.day}
+                  onChange={(e) => setAssignmentData({ ...assignmentData, day: e.target.value })}
+                  className="select select-bordered w-full"
+                  required
+                >
+                  <option value="">Select Day</option>
+                  {Array.from({ length: 6 }, (_, i) => {
+                    const date = dayjs(startOfWeek).add(i, 'day');
+                    return (
+                      <option key={i} value={date.format('YYYY-MM-DD')}>
+                        {date.format('dddd, D MMM')}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div className="form-control">
                 <label className="label">
@@ -326,8 +326,8 @@ export default function AssignmentModal() {
                   onChange={(e) => {
                     const codeGroupe = e.target.value;
                     const selectedGroup = assignments
-                      .map(assignment => assignment.groupe)
-                      .find(groupe => groupe.codeGroupe === codeGroupe);
+                      .map((assignment) => assignment.groupe)
+                      .find((groupe) => groupe.codeGroupe === codeGroupe);
                     setAssignmentData({
                       ...assignmentData,
                       groupe: selectedGroup || {
@@ -335,14 +335,14 @@ export default function AssignmentModal() {
                         intituleGroupe: '',
                         filiere: '',
                         secteur: '',
-                      }
+                      },
                     });
                   }}
                   className="select select-bordered w-full"
                   required
                 >
                   <option value="">Select Groupe</option>
-                  {[...new Set(assignments.map(a => a.groupe))].map((groupe, index) => (
+                  {[...new Set(assignments.map((a) => a.groupe))].map((groupe, index) => (
                     <option key={index} value={groupe.codeGroupe}>
                       {groupe.intituleGroupe} ({groupe.codeGroupe})
                     </option>
@@ -361,8 +361,8 @@ export default function AssignmentModal() {
                   onChange={(e) => {
                     const matricule = e.target.value;
                     const selectedFormateur = assignments
-                      .map(assignment => assignment.formateur)
-                      .find(formateur => formateur.matricule === matricule);
+                      .map((assignment) => assignment.formateur)
+                      .find((formateur) => formateur.matricule === matricule);
                     setAssignmentData({
                       ...assignmentData,
                       formateur: selectedFormateur || {
@@ -370,14 +370,14 @@ export default function AssignmentModal() {
                         nom: '',
                         email: '',
                         secteur: '',
-                      }
+                      },
                     });
                   }}
                   className="select select-bordered w-full"
                   required
                 >
                   <option value="">Select Formateur</option>
-                  {[...new Set(assignments.map(a => a.formateur))].map((formateur, index) => (
+                  {[...new Set(assignments.map((a) => a.formateur))].map((formateur, index) => (
                     <option key={index} value={formateur.matricule}>
                       {formateur.nom} ({formateur.matricule})
                     </option>
@@ -404,8 +404,8 @@ export default function AssignmentModal() {
                 <option key={index} value={salle}>
                   {salle}
                 </option>
-                ))}
-          </select>
+              ))}
+            </select>
           </div>
           <div className="flex justify-between items-center mt-4">
             <button type="submit" className="btn btn-primary" aria-label="Save Assignment">

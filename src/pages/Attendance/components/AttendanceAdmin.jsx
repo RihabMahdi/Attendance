@@ -28,7 +28,7 @@ export default function AttendanceAdmin() {
     const fetchData = async () => {
       try {
         const [secteurResponse, absentResponse] = await Promise.all([
-          fetch('http://localhost:3000/secteurs'),
+          fetch('http://localhost:3000/stagiaires'),
           fetch('http://localhost:3000/absentStudents'),
         ]);
         if (!secteurResponse.ok || !absentResponse.ok) throw new Error('Failed to fetch data');
@@ -40,7 +40,7 @@ export default function AttendanceAdmin() {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-      console.log(data)
+      console.log(data);
     };
 
     fetchData();

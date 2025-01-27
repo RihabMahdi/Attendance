@@ -93,11 +93,11 @@ const UserProfilePage = () => {
     <div className="min-h-screen bg-base-200 transition-all duration-300 ">
       {/* Hero Banner */}
       <div className="relative bg-primary h-72 overflow-hidden rounded-t-md">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary to-secondary rounded-t-md opacity-100"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-primary via-primary to-secondary rounded-t-md opacity-100"></div>
       </div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-40 pb-12 relative z-10">
         {/* Main Card */}
-        <div className="card bg-base-100 shadow-2xl backdrop-blur-sm">
+        <div className="card bg-base-100 shadow-2xl backdrop-blur-xs">
           <div className="card-body p-0">
             {/* Profile Header */}
             <div className="p-8 pb-6">
@@ -110,7 +110,7 @@ const UserProfilePage = () => {
                     onMouseLeave={() => setImageHovered(false)}
                   >
                     <div
-                      className={`w-36 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4 shadow-xl transition-all duration-300 ${imageHovered ? 'ring-secondary' : ''}`}
+                      className={`w-36 rounded-full ring-3 ring-primary ring-offset-base-100 ring-offset-4 shadow-xl transition-all duration-300 ${imageHovered ? 'ring-secondary' : ''}`}
                     >
                       <div className="relative">
                         <img
@@ -119,7 +119,7 @@ const UserProfilePage = () => {
                           className={`object-cover transition-all duration-300 ${imageHovered ? 'scale-105' : ''}`}
                         />
                         {isEditing && imageHovered && (
-                          <div className="absolute inset-0 bg-base-content/30 backdrop-blur-sm flex items-center justify-center rounded-full transition-all duration-300">
+                          <div className="absolute inset-0 bg-base-content/30 backdrop-blur-xs flex items-center justify-center rounded-full transition-all duration-300">
                             <label className="btn btn-circle btn-ghost btn-lg glass hover:bg-primary/50 cursor-pointer">
                               <Camera className="w-6 h-6 text-base-100" />
                               <input

@@ -10,6 +10,11 @@ const menuItems = [
 
   // Educational Structure
   {
+    label: 'Secteurs',
+    icon: 'FolderCog',
+    href: '/secteurs',
+  },
+  {
     label: 'Filières',
     icon: 'BookMarked',
     href: '/specializations',
@@ -21,12 +26,12 @@ const menuItems = [
   },
   {
     label: 'Cours',
-    icon: 'BookOpenText',
+    icon: 'LibraryBig',
     href: '/courses',
   },
   {
     label: 'Compétences',
-    icon: 'BookMarked',
+    icon: 'Shapes',
     href: '/competences',
   },
 
@@ -59,7 +64,7 @@ const menuItems = [
   },
   {
     label: 'Planificateur',
-    icon: 'Calendar',
+    icon: 'CalendarCog',
     href: '/Scheduler',
   },
   {
@@ -95,11 +100,6 @@ const menuItems = [
   { type: 'divider' },
 
   // Administration
-  {
-    label: 'Secteurs',
-    icon: 'FolderCog',
-    href: '/secteurs',
-  },
   {
     label: 'Paramètres',
     icon: 'Settings',

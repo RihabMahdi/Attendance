@@ -22,7 +22,15 @@ const ViewFiliere = ({ filiere, onClose, onDelete }) => {
       key: 'groupes',
       label: 'Groupes',
       icon: <Users className="w-5 h-5" />,
-      render: (data) => (Array.isArray(data.groupes) ? data.groupes.join(', ') : 'Aucun groupe'),
+      render: (data) => {
+        // Si 'groupes' est un tableau d'objets, on extrait une propriété comme 'name' ou 'id'
+        if (Array.isArray(data.groupes)) {
+          return data.groupes
+            .map((groupe) => (groupe.niveau ? groupe.niveau : groupe.id ? groupe.id : 'Inconnu')) // Remplace par la propriété correcte
+            .join(', ');
+        }
+        return 'Aucun groupe';
+      },
     },
   ];
 

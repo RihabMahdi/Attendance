@@ -1,4 +1,4 @@
-const WarningNotice = ({ name, group, date, reason, trainee }) => {
+const WarningNotice = ({ name, group, date, reason, filiere }) => {
   return (
     <div className="bg-white p-8 w-[210mm] h-[297mm] mx-auto">
       <div className="max-w-3xl mx-auto space-y-8">
@@ -42,12 +42,12 @@ const WarningNotice = ({ name, group, date, reason, trainee }) => {
           <div className="text-gray-800">
             <div className="flex items-center space-x-4 p-3 rounded-lg">
               <span className="font-semibold w-48">Nom du Stagiaire :</span>
-              <span className="flex-1">{trainee?.name}</span>
+              <span className="flex-1">{name}</span>
             </div>
 
             <div className="flex items-center space-x-4 p-3 rounded-lg">
               <span className="font-semibold w-48">Spécialité :</span>
-              <span className="flex-1">{trainee?.specialty}</span>
+              <span className="flex-1">{filiere}</span>
             </div>
 
             <div className="flex items-center space-x-4 p-3 rounded-lg">

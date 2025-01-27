@@ -139,10 +139,11 @@ function Sidebar() {
                 filteredGroups.map((group, index) => (
                   <div
                     key={index}
-                    className={`p-3 rounded-lg border transition-all ${selectedGroupe === group.codeGroupe
+                    className={`p-3 rounded-lg border transition-all ${
+                      selectedGroupe === group.codeGroupe
                         ? 'bg-primary text-primary-content hover:bg-primary/90'
                         : 'hover:bg-gray-100'
-                      } cursor-pointer`}
+                    } cursor-pointer`}
                     onClick={() => handleSelectGroupe(group.codeGroupe)}
                   >
                     <h4 className="text-sm font-semibold">{group.intituleGroupe}</h4>
@@ -180,10 +181,11 @@ function Sidebar() {
                 filteredFormateurs.map((formateur, index) => (
                   <div
                     key={index}
-                    className={`p-3 rounded-lg border transition-all ${selectedFormateur === formateur.matricule
+                    className={`p-3 rounded-lg border transition-all ${
+                      selectedFormateur === formateur.matricule
                         ? 'bg-primary text-primary-content hover:bg-primary/90'
                         : 'hover:bg-gray-100'
-                      } cursor-pointer`}
+                    } cursor-pointer`}
                     onClick={() => handleSelectFormateur(formateur.matricule)}
                   >
                     <h4 className="text-sm font-semibold">{formateur.nom}</h4>

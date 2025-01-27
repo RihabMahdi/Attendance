@@ -2,24 +2,24 @@ import { Link } from 'react-router';
 import { Clock, PlayCircle, User, BookOpen, AlertCircle } from 'lucide-react';
 import PropTypes from 'prop-types';
 
-const getTimeStatus = (deadline) => {
+const getTimeStatus = (Deadline) => {
   try {
-    if (!deadline) {
+    if (!Deadline) {
       return {
-        text: 'No deadline',
+        text: 'No Deadline',
         color: 'badge-neutral',
         urgency: 'none',
         icon: Clock,
       };
     }
 
-    const deadlineDate = new Date(deadline);
-    if (isNaN(deadlineDate.getTime())) {
+    const DeadlineDate = new Date(Deadline);
+    if (isNaN(DeadlineDate.getTime())) {
       throw new Error('Invalid date format');
     }
 
     const now = new Date();
-    const timeDiff = deadlineDate - now;
+    const timeDiff = DeadlineDate - now;
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
     const hoursLeft = Math.ceil(timeDiff / (1000 * 60 * 60));
 
@@ -100,22 +100,22 @@ const QuizCard = ({ quiz, onQuizStart, className = '', loading = false }) => {
 
   const {
     id,
-    courseName = 'Untitled Quiz',
+    competence,
     teacherName,
-    courseId,
-    deadline,
+    Deadline,
     disabled = false,
+    intitule,
     questionCount,
     duration,
   } = quiz;
 
-  const timeStatus = getTimeStatus(deadline);
+  const timeStatus = getTimeStatus(Deadline);
   const isExpired = timeStatus.urgency === 'expired' || timeStatus.urgency === 'error';
   const StatusIcon = timeStatus.icon;
 
   const formattedDeadline = (() => {
     try {
-      return new Date(deadline).toLocaleString(undefined, {
+      return new Date(Deadline).toLocaleString(undefined, {
         dateStyle: 'medium',
         timeStyle: 'short',
       });
@@ -157,16 +157,16 @@ const QuizCard = ({ quiz, onQuizStart, className = '', loading = false }) => {
         <div className="mb-4">
           <h3
             className="card-title text-base sm:text-lg font-bold mb-1 line-clamp-2"
-            title={courseName}
+            title={competence}
           >
-            {courseName}
+            {competence}
           </h3>
         </div>
 
         {/* Info Grid */}
         <div className="space-y-3 text-sm">
           <InfoRow icon={User} label="Instructor" value={teacherName} />
-          <InfoRow icon={BookOpen} label="Course ID" value={courseId} />
+          <InfoRow icon={BookOpen} label="Module" value={intitule} />
           <InfoRow icon={Clock} label="Due Date" value={formattedDeadline} />
         </div>
 
@@ -198,7 +198,7 @@ QuizCard.propTypes = {
     courseName: PropTypes.string,
     teacherName: PropTypes.string,
     courseId: PropTypes.string,
-    deadline: PropTypes.string,
+    Deadline: PropTypes.string,
     disabled: PropTypes.bool,
     questionCount: PropTypes.number,
     duration: PropTypes.number,

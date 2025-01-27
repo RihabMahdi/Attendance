@@ -44,10 +44,12 @@ export const useSecteursLogic = () => {
 
   const updateFilterOptions = (data) => {
     if (data?.length > 0) {
-      setFilters(prev => [{
-        ...prev[0],
-        options: [...new Set(data.map(f => f.secteur))],
-      }]);
+      setFilters((prev) => [
+        {
+          ...prev[0],
+          options: [...new Set(data.map((f) => f.secteur))],
+        },
+      ]);
     }
   };
 
@@ -56,15 +58,15 @@ export const useSecteursLogic = () => {
 
     // Apply search filter
     if (searchTerm) {
-      result = result.filter(secteur =>
+      result = result.filter((secteur) =>
         secteur.intitule?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     // Apply additional filters
-    filters.forEach(filter => {
+    filters.forEach((filter) => {
       if (filter.value) {
-        result = result.filter(secteur => secteur[filter.key] === filter.value);
+        result = result.filter((secteur) => secteur[filter.key] === filter.value);
       }
     });
 
@@ -84,7 +86,7 @@ export const useSecteursLogic = () => {
   };
 
   const handleSort = (column) => {
-    setSortConfig(prev => ({
+    setSortConfig((prev) => ({
       key: column,
       direction: prev.key === column && prev.direction === 'asc' ? 'desc' : 'asc',
     }));
@@ -107,8 +109,8 @@ export const useSecteursLogic = () => {
   };
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev =>
-      prev.map(filter => filter.key === key ? { ...filter, value } : filter)
+    setFilters((prev) =>
+      prev.map((filter) => (filter.key === key ? { ...filter, value } : filter))
     );
   };
 
@@ -165,9 +167,9 @@ export const useSecteursLogic = () => {
   };
 
   const exportSecteurs = () => {
-    const headers = ['Intitulé'];
-    const rows = filteredSecteurs.map(secteur => [`"${secteur.intitule.replace(/"/g, '""')}"`]);
-    const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+    const headers = ['code', 'Intitulé'];
+    const rows = filteredSecteurs.map((secteur) => [`"${secteur.intitule.replace(/"/g, '""')}"`]);
+    const csvContent = [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);

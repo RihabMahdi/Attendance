@@ -7,6 +7,7 @@ import {
   addModule,
   editModule,
 } from '../../features/modules/moduleSlice';
+import { LoadingSpinner, ErrorAlert } from '../../components';
 import Pagination from '../../components/shared/Pagination';
 import Modal from './components/Modal';
 
@@ -23,7 +24,7 @@ function ModulesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingModuleId, setEditingModuleId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsParPage = 3;
+  const itemsParPage = 4;
   const [formData, setFormData] = useState({
     code: '',
     intitule: '',
@@ -133,24 +134,16 @@ function ModulesPage() {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      <div className="flex justify-center items-start min-h-screen">
+        <LoadingSpinner message="Fetching Modules..." />
       </div>
     );
   }
 
   if (status === 'failed') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-500 text-xl mb-4">Failed to load modules</div>
-          <button
-            onClick={() => dispatch(fetchModules())}
-            className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
-          >
-            Retry
-          </button>
-        </div>
+      <div className="flex justify-center items-start min-h-screen">
+        <ErrorAlert message={status.error} />
       </div>
     );
   }
@@ -159,12 +152,15 @@ function ModulesPage() {
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h2 className="text-2xl font-bold">Liste des Modules</h2>
+        <h2 className="text-2xl font-bold text-gray-80">Liste des Modules</h2>
         <div className="flex gap-2">
-          <button onClick={() => dispatch(fetchModules())} className="btn btn-ghost btn-sm tooltip">
-            <RefreshCcw className="w-4 h-4" />
+          <button
+            onClick={() => dispatch(fetchModules())}
+            className="btn btn-outline btn-sm border-gray-300 hover:bg-gray-200"
+          >
+            <RefreshCcw className="w-4 h-4 text-gray-600" />
           </button>
-          <button onClick={handleUpdateModule} className="btn btn-outline btn-primary btn-sm gap-2">
+          <button onClick={handleUpdateModule} className="btn btn-primary btn-sm gap-2 shadow-md">
             <PlusCircle className="w-4 h-4" />
             Add Module
           </button>
@@ -175,12 +171,12 @@ function ModulesPage() {
       <div className="flex flex-col sm:flex-row gap-4 py-4">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/50 w-4 h-4" />
+            <Search className="w-4 h-4 text-gray-400" />
           </div>
           <input
             type="text"
-            className="input input-bordered block pl-10 pr-3 py-2"
-            placeholder="Search modules..."
+            className="input input-bordered w-full pl-10 text-sm border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="Rechercher un module..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -188,7 +184,7 @@ function ModulesPage() {
         <select
           value={filterSecteur}
           onChange={(e) => setfilterSecteur(e.target.value)}
-          className="select select-bordered"
+          className="select select-bordered text-sm border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         >
           <option value="Digital">Digital</option>
           <option value="Agro-ali">Agro-ali</option>
@@ -198,7 +194,7 @@ function ModulesPage() {
         <select
           value={filterNiveau}
           onChange={(e) => setFilterNiveau(e.target.value)}
-          className="select select-bordered"
+          className="select select-bordered text-sm border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         >
           <option value="1A">1ère année</option>
           <option value="2A">2ème année</option>
@@ -206,50 +202,36 @@ function ModulesPage() {
       </div>
 
       {/* Modules Table */}
-      <div className="rounded-lg border bg-base-100 hidden md:block">
+      <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead className="bg-base-200">
             <tr>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Code
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Intitulé
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Masse Horaire
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Filière
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Niveau
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Compétences
-              </th>
-              <th className="cursor-pointer hover:bg-base-300 transition-colors duration-200">
-                Etat
-              </th>
-              <th className="flex items-center gap-1 pl-2">Actions</th>
+              <th>Code</th>
+              <th>Intitulé</th>
+              <th>Masse Horaire</th>
+              <th>Filière</th>
+              <th>Niveau</th>
+              <th>Compétences</th>
+              <th>Etat</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-600">
+          <tbody>
             {currentItems.map((module, index) => (
-              <tr key={index} className="hover:bg-gray-100 dark:hover:bg-gray-700">
-                <td className="hover text-gray-900 dark:text-white">{module.code}</td>
-                <td className="hover text-gray-900 dark:text-white">{module.intitule}</td>
-                <td className="hover text-gray-900 dark:text-white">{module.masseHoraire}</td>
-                <td className="hover text-gray-900 dark:text-white">{module.filiere}</td>
-                <td className="hover text-gray-900 dark:text-white">{module.niveau}</td>
-                <td className="hover text-gray-900 dark:text-white">{module.competences}</td>
+              <tr key={index} className="hover:bg-gray-100">
+                <td>{module.code}</td>
+                <td>{module.intitule}</td>
+                <td>{module.masseHoraire}</td>
+                <td>{module.filiere}</td>
+                <td>{module.niveau}</td>
+                <td>{module.competences}</td>
                 <td className="hover">
                   <div
-                    className={`${
+                    className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${
                       module.etat === 'Affecté'
-                        ? 'bg-green-500 text-white dark:bg-green-700'
-                        : 'bg-red-500 text-white dark:bg-red-700'
-                    } inline-block px-2 py-1 rounded`}
+                        ? 'bg-green-100 text-green-600'
+                        : 'bg-red-100 text-red-600'
+                    }`}
                   >
                     {module.etat}
                   </div>

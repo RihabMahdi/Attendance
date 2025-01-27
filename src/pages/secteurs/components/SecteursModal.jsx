@@ -7,15 +7,15 @@ const SecteursModal = ({ isOpen, mode, secteur, onClose, onSave, onDelete }) => 
   const isViewMode = mode === 'view';
   const isEditMode = mode === 'edit';
 
-  const [formData, setFormData] = useState({ intitule: '' });
+  const [formData, setFormData] = useState({ code: '', intitule: '' });
   const [loading, setLoading] = useState(false);
 
   // Update form when secteur changes
   useEffect(() => {
     if (secteur) {
-      setFormData({ intitule: secteur.intitule || '' });
+      setFormData({ code: secteur.code || '', intitule: secteur.intitule || '' });
     } else {
-      setFormData({ intitule: '' });
+      setFormData({ code: '', intitule: '' });
     }
   }, [secteur]);
 
@@ -25,13 +25,13 @@ const SecteursModal = ({ isOpen, mode, secteur, onClose, onSave, onDelete }) => 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.intitule.trim()) return; // Prevent empty submissions
+    if (!formData.intitule.trim() && !formData.code.trim()) return; // Prevent empty submissions
 
     setLoading(true);
     try {
       await onSave({ ...secteur, ...formData });
       onClose(); // Close modal after saving
-      setFormData({ intitule: '' }); // Reset form
+      setFormData({ code: '', intitule: '' }); // Reset form
     } catch (error) {
       console.error("Erreur lors de l'enregistrement :", error);
     } finally {
@@ -49,6 +49,14 @@ const SecteursModal = ({ isOpen, mode, secteur, onClose, onSave, onDelete }) => 
 
       {isViewMode ? (
         <div>
+          <div>
+            <label className="label flex items-center gap-2">
+              <Album className="text-primary w-5 h-5" />
+              <span className="label-text">Code</span>
+            </label>
+            <div className="text-sm">{secteur?.code}</div>
+          </div>
+
           <div>
             <label className="label flex items-center gap-2">
               <Album className="text-primary w-5 h-5" />
@@ -71,6 +79,23 @@ const SecteursModal = ({ isOpen, mode, secteur, onClose, onSave, onDelete }) => 
           <div className="form-control">
             <label className="label flex items-center gap-2">
               <Album className="text-primary w-5 h-5" />
+              <span className="label-text">Code</span>
+            </label>
+            <input
+              type="text"
+              name="code"
+              value={formData.code}
+              onChange={handleChange}
+              className="input input-bordered w-full"
+              required
+              autoFocus
+              disabled={loading} // Prevent input while saving
+            />
+          </div>
+
+          <div className="form-control">
+            <label className="label flex items-center gap-2">
+              <Album className="text-primary w-5 h-5" />
               <span className="label-text">Intitulé</span>
             </label>
             <input
@@ -89,7 +114,11 @@ const SecteursModal = ({ isOpen, mode, secteur, onClose, onSave, onDelete }) => 
             <button type="button" onClick={onClose} className="btn" disabled={loading}>
               Annuler
             </button>
-            <button type="submit" className={`btn btn-primary ${loading ? 'loading' : ''}`} disabled={loading}>
+            <button
+              type="submit"
+              className={`btn btn-primary ${loading ? 'loading' : ''}`}
+              disabled={loading}
+            >
               {isEditMode ? 'Mettre à jour' : 'Créer'}
             </button>
           </div>
@@ -102,11 +131,12 @@ SecteursModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   mode: PropTypes.oneOf(['view', 'edit', 'create']).isRequired,
   secteur: PropTypes.shape({
-    intitule: PropTypes.string
+    code: PropTypes.string,
+    intitule: PropTypes.string,
   }),
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default SecteursModal;

@@ -10,7 +10,10 @@ const QuizzesPage = () => {
   const quizData = useSelector((state) =>
     state.quizzes.quizzes
       ? state.quizzes.quizzes.filter(
-          (quiz) => quiz.status === 'active' && quiz.questions?.length > 0
+          (quiz) =>
+            quiz.status === 'active' &&
+            quiz.questions?.length > 0 &&
+            quiz.questionsSelected?.length > 0
         )
       : []
   );
@@ -32,8 +35,8 @@ const QuizzesPage = () => {
       'all',
       ...new Set(
         quizData
-          .filter((quiz) => quiz?.coursequizID)
-          .map((quiz) => quiz.coursequizID)
+          .filter((quiz) => quiz?.intitule)
+          .map((quiz) => quiz.intitule)
           .sort()
       ),
     ],
@@ -43,15 +46,13 @@ const QuizzesPage = () => {
   const filteredQuizzes = useMemo(
     () =>
       quizData.filter((quiz) => {
-        const searchFields = [quiz?.courseName, quiz?.techerName, quiz?.description].filter(
-          Boolean
-        );
+        const searchFields = [quiz?.competence, quiz?.techerName].filter(Boolean);
 
         const matchesSearch =
           !searchTerm ||
           searchFields.some((field) => field.toLowerCase().includes(searchTerm.toLowerCase()));
 
-        const matchesCategory = categoryFilter === 'all' || quiz?.coursequizID === categoryFilter;
+        const matchesCategory = categoryFilter === 'all' || quiz?.intitule === categoryFilter;
 
         return matchesSearch && matchesCategory;
       }),
@@ -138,7 +139,7 @@ const QuizzesPage = () => {
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category === 'all'
-                    ? 'All Categories'
+                    ? 'All Modules'
                     : category.charAt(0).toUpperCase() + category.slice(1)}
                 </option>
               ))}

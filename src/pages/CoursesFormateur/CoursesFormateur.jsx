@@ -58,7 +58,7 @@ const CoursesFormateur = () => {
                     <img
                       src={course.imageUrl}
                       alt={course.courseName}
-                      className="w-20 h-auto rounded"
+                      className="w-20 h-auto rounded-sm"
                     />
                   </td>
                   <td>

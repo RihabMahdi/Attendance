@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { chatSession } from './AiModelAnalyze';
-import { CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';  // Icons from lucide
+import { CheckCircle, AlertCircle, Lightbulb } from 'lucide-react'; // Icons from lucide
 import { LoadingSpinner } from '../../components';
 
 const QuizAnalyze = () => {
@@ -41,7 +41,7 @@ const QuizAnalyze = () => {
       <h2 className="text-3xl font-semibold text-center text-primary">Feedback sur le quiz</h2>
 
       <div className="space-y-4">
-      {points_forts?.length > 0 && (
+        {points_forts?.length > 0 && (
           <div className="card bg-green-100 shadow-lg p-4 rounded-lg">
             <h3 className="flex items-center text-lg font-semibold text-green-700">
               <CheckCircle className="mr-2" size={24} />
@@ -51,26 +51,25 @@ const QuizAnalyze = () => {
           </div>
         )}
 
-      {domaines_d_amélioration?.length > 0 && (
-        <div className="card bg-red-100 shadow-lg p-4 rounded-lg">
-          <h3 className="flex items-center text-lg font-semibold text-red-700">
-            <AlertCircle className="mr-2" size={24} />
-            Domaines d'Amélioration
-          </h3>
-          <p className="text-red-800">{domaines_d_amélioration}</p>
-        </div>
-           )}
-
+        {domaines_d_amélioration?.length > 0 && (
+          <div className="card bg-red-100 shadow-lg p-4 rounded-lg">
+            <h3 className="flex items-center text-lg font-semibold text-red-700">
+              <AlertCircle className="mr-2" size={24} />
+              Domaines d'Amélioration
+            </h3>
+            <p className="text-red-800">{domaines_d_amélioration}</p>
+          </div>
+        )}
 
         {recommandations?.length > 0 && (
-        <div className="card bg-yellow-100 shadow-lg p-4 rounded-lg">
-          <h3 className="flex items-center text-lg font-semibold text-yellow-700">
-            <Lightbulb className="mr-2" size={24} />
-            Recommandations
-          </h3>
-          <p className="text-yellow-800">{recommandations}</p>
-        </div>
-          )}
+          <div className="card bg-yellow-100 shadow-lg p-4 rounded-lg">
+            <h3 className="flex items-center text-lg font-semibold text-yellow-700">
+              <Lightbulb className="mr-2" size={24} />
+              Recommandations
+            </h3>
+            <p className="text-yellow-800">{recommandations}</p>
+          </div>
+        )}
       </div>
     </div>
   );

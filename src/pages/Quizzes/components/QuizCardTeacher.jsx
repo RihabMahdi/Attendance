@@ -10,23 +10,26 @@ import {
   CheckCircle,
   XCircle,
   AlertCircle,
+  Code,
+  Building2,
+  HelpCircle,
 } from 'lucide-react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx'; // Ensure clsx is installed for class concatenation
 
 // Time Status Calculation (Memoized)
-const getTimeStatus = (deadline) => {
-  if (!deadline) {
-    return { text: 'No deadline', color: 'badge-neutral', urgency: 'none', icon: Clock };
+const getTimeStatus = (Deadline) => {
+  if (!Deadline) {
+    return { text: 'No Deadline', color: 'badge-neutral', urgency: 'none', icon: Clock };
   }
 
-  const deadlineDate = new Date(deadline);
-  if (isNaN(deadlineDate.getTime())) {
+  const DeadlineDate = new Date(Deadline);
+  if (isNaN(DeadlineDate.getTime())) {
     return { text: 'Invalid date', color: 'badge-error', urgency: 'error', icon: AlertCircle };
   }
 
   const now = new Date();
-  const timeDiff = deadlineDate - now;
+  const timeDiff = DeadlineDate - now;
   const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
   if (timeDiff <= 0) {
@@ -72,27 +75,28 @@ const QuizCardTeacher = ({ quiz, onDelete, onEdit, onViewDetails, onAddQuestions
 
   const {
     id,
-    courseName = 'Untitled Quiz',
+    intitule = 'Untitled Quiz',
     teacherName,
-    coursequizID,
-    deadline,
+    code,
+    Deadline,
+    competence,
     status,
     questions = [],
   } = quiz;
 
   // Memoized Time Status
-  const timeStatus = useMemo(() => getTimeStatus(deadline), [deadline]);
+  const timeStatus = useMemo(() => getTimeStatus(Deadline), [Deadline]);
   const StatusIcon = timeStatus.icon;
 
   // Format Deadline Date
   const formattedDeadline = useMemo(() => {
-    const date = new Date(deadline);
+    const date = new Date(Deadline);
     return isNaN(date.getTime())
       ? 'Invalid date'
       : new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(
           date
         );
-  }, [deadline]);
+  }, [Deadline]);
 
   // Optimized Callbacks
   const handleViewDetails = useCallback(() => onViewDetails(id), [onViewDetails, id]);
@@ -113,8 +117,8 @@ const QuizCardTeacher = ({ quiz, onDelete, onEdit, onViewDetails, onAddQuestions
           {/* Title & Badges */}
           <div>
             <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
-              <h3 className="text-lg font-bold line-clamp-1 flex-1" title={courseName}>
-                {courseName}
+              <h3 className="text-lg font-bold line-clamp-1 flex-1" title={intitule}>
+                {intitule}
               </h3>
               <div className="flex gap-2 flex-shrink-0">
                 <div className={`badge ${timeStatus.color} gap-1`}>
@@ -139,10 +143,12 @@ const QuizCardTeacher = ({ quiz, onDelete, onEdit, onViewDetails, onAddQuestions
 
             {/* Info Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+              <InfoRow icon={BookOpen} label="Module ID" value={code} />
+              <InfoRow icon={Building2} label="Competence" value={competence} />
+              <InfoRow icon={Clock} label="Deadline" value={formattedDeadline} />
               <InfoRow icon={User} label="Instructor" value={teacherName} />
-              <InfoRow icon={BookOpen} label="Course ID" value={coursequizID} />
-              <InfoRow icon={Clock} label="deadline" value={formattedDeadline} />
               <div className="flex items-center gap-2 text-base-content/70">
+                <HelpCircle className="w-4 h-4" />
                 <span className="font-medium">Questions:</span>
                 <span
                   className={clsx(
@@ -178,10 +184,10 @@ const QuizCardTeacher = ({ quiz, onDelete, onEdit, onViewDetails, onAddQuestions
 QuizCardTeacher.propTypes = {
   quiz: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    courseName: PropTypes.string,
+    intitule: PropTypes.string,
     teacherName: PropTypes.string,
-    coursequizID: PropTypes.string,
-    deadline: PropTypes.string,
+    code: PropTypes.string,
+    Deadline: PropTypes.string,
     status: PropTypes.string,
     questions: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,

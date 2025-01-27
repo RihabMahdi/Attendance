@@ -95,7 +95,7 @@ const SearchBar = () => {
                   role="option"
                   onClick={handleSubmit}
                 >
-                  <Search className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                  <Search className="w-4 h-4 shrink-0" aria-hidden="true" />
                   <span className="truncate">Results for "{searchQuery}"</span>
                 </button>
               </div>
@@ -111,7 +111,7 @@ const SearchBar = () => {
                     onClick={() => setSearchQuery(search)}
                     role="option"
                   >
-                    <Search className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                    <Search className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="truncate">{search}</span>
                   </button>
                 ))}

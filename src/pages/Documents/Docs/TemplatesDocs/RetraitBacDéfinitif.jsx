@@ -1,4 +1,4 @@
-const BacWithdrawalNotice = ({ name, group, date, cin, student, reason }) => {
+const BacWithdrawalNotice = ({ name, filiere, group, date, cin, birthdate, level, reason }) => {
   return (
     <div className="bg-white p-8 w-[210mm] h-[297mm] mx-auto">
       <div className="max-w-3xl mx-auto space-y-8">
@@ -15,13 +15,13 @@ const BacWithdrawalNotice = ({ name, group, date, cin, student, reason }) => {
         </div>
 
         <h2 className="text-3xl font-bold text-center text-gray-900 border-2 border-gray-300 py-4 rounded-lg">
-          Demande de Retrait Temporaire du Bac
+          Demande de Retrait Définitif du Bac
         </h2>
 
         <div className="space-y-4">
           <p className="text-xl font-semibold text-gray-900">
-            Je soussigné(e), {name}, déclare avoir procédé au retrait temporaire de mon Bac de
-            l'ISTA AIT MELLOUL pour les raisons suivantes :
+            Je soussigné(e), {name}, déclare avoir procédé au retrait définitif de mon Bac de l'ISTA
+            AIT MELLOUL pour les raisons suivantes :
           </p>
 
           <p className="text-lg text-gray-700">Date de retrait : {date}</p>
@@ -40,26 +40,32 @@ const BacWithdrawalNotice = ({ name, group, date, cin, student, reason }) => {
             <div className="text-gray-800">
               <div className="flex items-center space-x-4 p-3 rounded-lg">
                 <span className="font-semibold w-48">Nom :</span>
-                <span className="flex-1">{name}</span>
+                <span className="flex-1">{name?.toUpperCase()}</span>
               </div>
 
               <div className="flex items-center space-x-4 p-3 rounded-lg">
                 <span className="font-semibold w-48">CIN :</span>
-                <span className="flex-1">{cin}</span>
+                <span className="flex-1">{cin ? cin.toUpperCase() : 'Non specifiée'}</span>
               </div>
 
               <div className="flex items-center space-x-4 p-3 rounded-lg">
                 <span className="font-semibold w-48">Date de Naissance :</span>
-                <span className="flex-1">{student?.dob || 'Non spécifiée'}</span>
+                <span className="flex-1">{birthdate || 'Non spécifiée'}</span>
               </div>
 
               <div className="flex items-center space-x-4 p-3 rounded-lg">
-                <span className="font-semibold w-48">Niveau d'Éducation :</span>
-                <span className="flex-1">{student?.level || 'Non spécifié'}</span>
+                <span className="font-semibold w-48">Niveau :</span>
+
+                <span className="flex-1">{level}</span>
               </div>
 
               <div className="flex items-center space-x-4 p-3 rounded-lg">
                 <span className="font-semibold w-48">Spécialité :</span>
+                <span className="flex-1">{filiere}</span>
+              </div>
+
+              <div className="flex items-center space-x-4 p-3 rounded-lg">
+                <span className="font-semibold w-48">Groupe :</span>
                 <span className="flex-1">{group}</span>
               </div>
             </div>

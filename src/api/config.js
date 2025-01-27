@@ -100,4 +100,8 @@ export const apiService = {
   },
 };
 
+export const getCompetencesByModule = async (codeModule) => {
+  return await apiService.get(`/competences?code_module=${codeModule}`);
+};
+
 export default config;

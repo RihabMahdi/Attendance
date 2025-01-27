@@ -35,11 +35,18 @@ const EditableQuestion = ({
     setIsEditing(false);
     onEditEnd();
   };
+
   const handleEditClick = () => {
     if (!editingQuestionId) {
       onEditStart(question.id);
       setIsEditing(true);
     }
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditedQuestion({ ...question });
+    onEditEnd();
   };
 
   return (
@@ -110,7 +117,7 @@ const EditableQuestion = ({
               <button onClick={handleSave} className="btn btn-outline btn-success">
                 Save
               </button>
-              <button onClick={() => setIsEditing(false)} className="btn btn-outline btn-error">
+              <button onClick={handleCancel} className="btn btn-outline btn-error">
                 Cancel
               </button>
             </>

@@ -119,14 +119,13 @@ export const useFilieresLogic = (filieres) => {
       await dispatch(deleteFiliere(filiereToDelete.id)).unwrap();
       setIsDeleteModalOpen(false);
       setFiliereToDelete(null);
-      handleModalClose(); // Close the view modal if open
+      handleModalClose();
     } catch (error) {
       console.error('Failed to delete filiere:', error);
       alert('Erreur lors de la suppression de la filière');
     }
   };
 
-  // Save or edit filiere data
   const handleSave = async (filiereData) => {
     try {
       if (filiereData.id) {
@@ -141,17 +140,18 @@ export const useFilieresLogic = (filieres) => {
     }
   };
 
-  // Export filtered and sorted filieres to CSV
   const exportFilieres = () => {
     const headers = ['Code Filiere', 'Intitule Filiere', 'Secteur', 'Groupes'];
+
     const rows = filteredAndSortedFilieres.map((filiere) => [
       filiere.code_filiere,
       filiere.intitule_filiere,
       filiere.secteur,
-      Array.isArray(filiere.groupes) ? filiere.groupes.join(';') : '',
+      Array.isArray(filiere.groupes) ? filiere.groupes.map((group) => group.niveau).join(';') : '',
     ]);
 
     const csvContent = [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
+
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);

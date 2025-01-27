@@ -78,9 +78,7 @@ const Tile = ({ tile, onClick = () => {} }) => {
             items-center 
             justify-center 
             text-center 
-            p-4 
-            rotate-y-180 
-            backface-hidden 
+            p-4
             ${isHovered ? 'opacity-100' : 'opacity-0'}
             transition-opacity 
             duration-300

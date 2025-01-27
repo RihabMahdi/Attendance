@@ -1,19 +1,33 @@
-// src/pages/Filieres/components/AddEditFiliere.jsx
 import { useState, useEffect } from 'react';
 import { Code, BookOpen, Building2, Users, Save, Plus } from 'lucide-react';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchGroupes } from '../../../features/Groupes/GroupesSlice';
 
 const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
+  const dispatch = useDispatch();
+
+  // Récupérer les groupes depuis le store Redux
+  const { groups, loading } = useSelector((state) => state.groups);
+
   const [formData, setFormData] = useState({
     code_filiere: '',
     intitule_filiere: '',
     secteur: '',
-    groupes: '',
+    groupes: [], // Initialisation comme tableau vide
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Charger les groupes si ce n'est pas déjà fait
+  useEffect(() => {
+    if (!groups.length && !loading) {
+      dispatch(fetchGroupes());
+    }
+  }, [dispatch, groups.length, loading]);
+
+  // Initialisation des données lors de l'édition
   useEffect(() => {
     if (filiere) {
       setFormData({
@@ -21,18 +35,38 @@ const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
         code_filiere: filiere.code_filiere || '',
         intitule_filiere: filiere.intitule_filiere || '',
         secteur: filiere.secteur || '',
-        groupes: Array.isArray(filiere.groupes) ? filiere.groupes.join(', ') : '',
+        // Conserver uniquement l'id et le niveau des groupes
+        groupes: Array.isArray(filiere.groupes)
+          ? filiere.groupes.map((group) => ({ id: group.id, niveau: group.niveau }))
+          : [], // Assurez-vous que seuls id et niveau sont récupérés
       });
     }
   }, [filiere]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error when user starts typing
+    const { name, value, selectedOptions } = e.target;
+    if (name === 'groupes') {
+      // Récupérer les groupes sélectionnés dans le select multiple
+      const selectedGroups = Array.from(selectedOptions, (option) => {
+        // Trouver l'objet complet du groupe en utilisant l'ID sélectionné depuis groups
+        const group = groups.find((group) => group.id === option.value);
+        // Conserver uniquement l'id et le niveau
+        return { id: group.id, niveau: group.niveau };
+      });
+
+      // Maintenir l'ordre des groupes sélectionnés
+      setFormData((prev) => ({
+        ...prev,
+        [name]: selectedGroups, // Mettre à jour les groupes sélectionnés sous forme d'objets avec id et niveau
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+
+    // Clear error when user starts typing or selecting
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -52,6 +86,9 @@ const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
     if (!formData.secteur.trim()) {
       newErrors.secteur = 'Le secteur est requis';
     }
+    if (formData.groupes.length === 0) {
+      newErrors.groupes = 'Les groupes sont requis';
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -64,14 +101,12 @@ const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
     try {
       const filiereData = {
         ...formData,
-        groupes: formData.groupes
-          .split(',')
-          .map((g) => g.trim())
-          .filter(Boolean),
+        // On peut directement envoyer l'ID et le niveau des groupes dans l'ordre sélectionné
+        groupes: formData.groupes.map((group) => ({ id: group.id, niveau: group.niveau })),
       };
 
       if (isEditMode) {
-        // Ensure we keep the id for editing
+        // Garder l'ID pour la mise à jour
         filiereData.id = filiere.id;
       }
 
@@ -109,7 +144,7 @@ const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
       id: 'groupes',
       label: 'Groupes',
       icon: <Users className="w-4 h-4" />,
-      placeholder: 'Entrez les groupes (séparés par des virgules)',
+      placeholder: 'Sélectionnez les groupes',
     },
   ];
 
@@ -129,15 +164,38 @@ const AddEditFiliere = ({ filiere, onClose, onSave, isEditMode }) => {
                 {field.label}
               </span>
             </label>
-            <input
-              type="text"
-              name={field.id}
-              value={formData[field.id]}
-              onChange={handleChange}
-              placeholder={field.placeholder}
-              className={`input input-bordered w-full ${errors[field.id] ? 'input-error' : ''}`}
-              disabled={isSubmitting}
-            />
+
+            {field.id === 'groupes' ? (
+              <select
+                name="groupes"
+                value={formData.groupes.map((groupe) => groupe.id)}
+                onChange={handleChange}
+                multiple
+                className={`input input-bordered w-full h-20 ${errors[field.id] ? 'input-error' : ''} rounded-md p-2 border border-gray-300 focus:outline-hidden focus:ring-2 focus:ring-blue-500`}
+                disabled={isSubmitting}
+              >
+                {loading ? (
+                  <option>Chargement des groupes...</option>
+                ) : (
+                  groups.map((group) => (
+                    <option key={group.id} value={group.id}>
+                      {group.niveau}
+                    </option>
+                  ))
+                )}
+              </select>
+            ) : (
+              <input
+                type="text"
+                name={field.id}
+                value={formData[field.id]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                className={`input input-bordered w-full ${errors[field.id] ? 'input-error' : ''}`}
+                disabled={isSubmitting}
+              />
+            )}
+
             {errors[field.id] && (
               <label className="label">
                 <span className="label-text-alt text-error">{errors[field.id]}</span>

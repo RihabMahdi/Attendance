@@ -13,9 +13,7 @@ export default function SchedulerHeader() {
   const startOfWeek = useSelector((state) => state.scheduler.startOfWeek);
   const assignments = useSelector((state) => state.scheduler.assignments);
   const startDate = startOfWeek ? dayjs(startOfWeek) : null;
-  const { selectedGroupe, selectedFormateur } = useSelector(
-    (state) => state.scheduler
-  );
+  const { selectedGroupe, selectedFormateur } = useSelector((state) => state.scheduler);
 
   return (
     <header className="flex items-center justify-between">
@@ -33,11 +31,11 @@ export default function SchedulerHeader() {
       <div className="flex items-center px-5 pt-5 mx-5">
         {(() => {
           const firstMatch = assignments.find(
-            assignment => 
+            (assignment) =>
               assignment.groupe.codeGroupe === selectedGroupe ||
               assignment.formateur.matricule === selectedFormateur
           );
-          
+
           if (firstMatch) {
             return (
               <p>

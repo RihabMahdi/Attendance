@@ -83,7 +83,7 @@ const NotificationsMenu = () => {
                           </div>
                         </div>
                         {notification.isUnread && (
-                          <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
                         )}
                       </div>
                     </li>

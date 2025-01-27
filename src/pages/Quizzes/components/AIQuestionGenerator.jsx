@@ -20,7 +20,7 @@ const AIQuestionGenerator = ({ quizId, onQuestionsGenerated }) => {
   }, [quizId]);
 
   useEffect(() => {
-    setTopic(quiz?.courseName || '');
+    setTopic(quiz?.competence || '');
   }, [quiz]);
 
   const apiKey = 'AIzaSyB9-iKGvCcu2VrsbGHJkIQ28HqxrRWgbLs';

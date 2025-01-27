@@ -9,10 +9,10 @@ import { PageHeader } from '../../components';
 const TeacherQuizzes = () => {
   const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user') || '{}');
   const [quizzes, setQuizzes] = useState([]);
-  const [courses, setApiCourses] = useState([]);
+  const [modules, setApiModules] = useState([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState('');
+  const [selectedModule, setSelectedModule] = useState('');
   const [editingQuiz, setEditingQuiz] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +20,7 @@ const TeacherQuizzes = () => {
 
   useEffect(() => {
     fetchQuizzes();
-    fetchApiCourses();
+    fetchApiModules();
   }, []);
 
   const fetchQuizzes = async () => {
@@ -37,13 +37,13 @@ const TeacherQuizzes = () => {
     }
   };
 
-  const fetchApiCourses = async () => {
+  const fetchApiModules = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/courses`);
+      const response = await fetch(`${BASE_URL}/modules`);
       const data = await response.json();
-      setApiCourses(data);
+      setApiModules(data);
     } catch (error) {
-      console.error('Error fetching courses:', error);
+      console.error('Error fetching modules:', error);
     }
   };
 
@@ -121,8 +121,8 @@ const TeacherQuizzes = () => {
     }
   };
 
-  const filteredQuizzes = selectedCourse
-    ? quizzes.filter((quiz) => quiz.coursequizID === selectedCourse)
+  const filteredQuizzes = selectedModule
+    ? quizzes.filter((quiz) => quiz.code === selectedModule)
     : quizzes;
 
   const indexOfLastQuiz = currentPage * quizzesPerPage;
@@ -138,14 +138,14 @@ const TeacherQuizzes = () => {
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="flex-1 relative">
           <select
-            value={selectedCourse}
-            onChange={(e) => setSelectedCourse(e.target.value)}
+            value={selectedModule}
+            onChange={(e) => setSelectedModule(e.target.value)}
             className="select select-bordered w-full max-w"
           >
-            <option value="">All Courses</option>
-            {courses.map((course) => (
-              <option key={course.coursequizID} value={course.coursequizID}>
-                {course.courseName}
+            <option value="">All Modules</option>
+            {modules.map((module) => (
+              <option key={module.code} value={module.code}>
+                {module.intitule}
               </option>
             ))}
           </select>
@@ -187,7 +187,7 @@ const TeacherQuizzes = () => {
               </button>
             </div>
             <QuizForm
-              courses={courses}
+              modules={modules}
               onSubmit={handleAddQuiz}
               onCancel={() => setIsAddModalOpen(false)}
             />
@@ -209,7 +209,7 @@ const TeacherQuizzes = () => {
             </div>
             <QuizForm
               initialQuiz={editingQuiz}
-              courses={courses}
+              modules={modules}
               onSubmit={handleUpdateQuiz}
               onCancel={() => setIsEditModalOpen(false)}
             />

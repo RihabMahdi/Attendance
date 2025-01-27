@@ -91,7 +91,7 @@ const UpdateCourse = () => {
             name="Module"
             value={courseData.Module}
             onChange={handleChange}
-            className="w-full p-2 rounded border border-gray-300"
+            className="w-full p-2 rounded-sm border border-gray-300"
             required
           />
         </div>
@@ -102,7 +102,7 @@ const UpdateCourse = () => {
             name="Title"
             value={courseData.courseName}
             onChange={handleChange}
-            className="w-full p-2 rounded border border-gray-300"
+            className="w-full p-2 rounded-sm border border-gray-300"
             required
           />
         </div>
@@ -113,7 +113,7 @@ const UpdateCourse = () => {
             name="imageUrl"
             value={courseData.imageUrl}
             onChange={handleChange}
-            className="w-full p-2 rounded border border-gray-300"
+            className="w-full p-2 rounded-sm border border-gray-300"
             required
           />
         </div>
@@ -124,7 +124,7 @@ const UpdateCourse = () => {
             name="pdfUrl"
             value={courseData.pdfUrl}
             onChange={handleChange}
-            className="w-full p-2 rounded border border-gray-300"
+            className="w-full p-2 rounded-sm border border-gray-300"
           />
         </div>
         {pdfPreviewData && (
@@ -134,7 +134,7 @@ const UpdateCourse = () => {
         )}
         <button
           type="submit"
-          className="bg-green-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4"
+          className="bg-green-500 hover:bg-blue-600 text-white py-2 px-4 rounded-sm mt-4"
         >
           Save Changes
         </button>
