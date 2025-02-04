@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 const Navbar = () => {
   return (
     <header className="fixed z-20 top-0 left-0 right-0 p-2">
-      <nav className="navbar mx-auto rounded-2xl bg-base-100 shadow-md">
+      <nav className="navbar mx-auto rounded-box bg-base-100 shadow-md">
         {/* Left Section */}
         <div className="navbar-start gap-2">
           <SidebarToggle />

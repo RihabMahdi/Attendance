@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PlusCircle, Edit, RefreshCcw, Trash2, Search } from 'lucide-react';
+import { PlusCircle, Edit, RefreshCcw, Trash2, Filter } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchModules,
@@ -149,7 +149,7 @@ function ModulesPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto p-6 space-y-6">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-80">Liste des Modules</h2>
@@ -168,10 +168,10 @@ function ModulesPage() {
       </div>
 
       {/* Filters Section */}
-      <div className="flex flex-col sm:flex-row gap-4 py-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="w-4 h-4 text-gray-400" />
+            <Filter className="w-4 h-4 text-gray-400" />
           </div>
           <input
             type="text"
@@ -218,8 +218,8 @@ function ModulesPage() {
           </thead>
           <tbody>
             {currentItems.map((module, index) => (
-              <tr key={index} className="hover:bg-gray-100">
-                <td>{module.code}</td>
+              <tr key={index} className="mt-0.5 text-sm text-base-content">
+                <td className="font-medium">{module.code}</td>
                 <td>{module.intitule}</td>
                 <td>{module.masseHoraire}</td>
                 <td>{module.filiere}</td>
@@ -238,13 +238,13 @@ function ModulesPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
-                    className="text-gray-600 hover:text-gray-900 mr-3 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="btn btn-ghost btn-xs tooltip"
                     onClick={() => handleEditModule(module)}
                   >
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
-                    className="text-orange-600 hover:text-red-900 dark:text-orange-400 dark:hover:text-red-500"
+                    className="btn btn-ghost btn-xs text-error tooltip"
                     onClick={() => handleDelete(module.id)}
                   >
                     <Trash2 className="w-4 h-4" />

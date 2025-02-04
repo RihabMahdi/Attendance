@@ -27,7 +27,7 @@ const DashboardContent = () => {
             p-8
             bg-base-100
             shadow-md
-            rounded-2xl
+            rounded-box
             transition-all duration-300 ease-in-out
           `}
       >

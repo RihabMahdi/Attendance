@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCourses, deleteCourse } from '../../features/coursesFormateur/coursesFormateurSlice'; // Adjust path if needed
@@ -6,20 +6,29 @@ import { fetchCourses, deleteCourse } from '../../features/coursesFormateur/cour
 const CoursesFormateur = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { courses } = useSelector((state) => state.courses);
 
   useEffect(() => {
     // Fetch courses from the API
     dispatch(fetchCourses());
   }, [dispatch]);
 
+  const { courses } = useSelector((state) => state.courses);
+
   const handleUpdateCourse = (id) => {
-    navigate(`/school-management-app/courses/update/${id}`);
+    navigate(`/CoursesFormateur/updateCourse/${id}`);
   };
 
   const handleDeleteCourse = (id) => {
     if (window.confirm('Are you sure you want to delete this course?')) {
-      dispatch(deleteCourse(id));
+      // Dispatch delete action
+      dispatch(deleteCourse(id))
+        .then(() => {
+          // Fetch courses again after deleting
+          dispatch(fetchCourses());
+        })
+        .catch((error) => {
+          console.error('Failed to delete course:', error);
+        });
     }
   };
 
@@ -40,9 +49,8 @@ const CoursesFormateur = () => {
               <th>Module</th>
               <th>Title</th>
               <th>Nom du formateur</th>
-              <th>imageUrl</th>
-              <th>videoUrl</th>
-              <th>Download</th>
+              <th>Image</th>
+              <th>Video</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -58,14 +66,18 @@ const CoursesFormateur = () => {
                     <img
                       src={course.imageUrl}
                       alt={course.courseName}
-                      className="w-20 h-auto rounded-sm"
+                      className="w-20 h-auto rounded"
                     />
                   </td>
                   <td>
-                    <a href={course.videoLink}>videoUrl</a>
-                  </td>
-                  <td>
-                    <a href={course.pdfUrl}>pdfUrl</a>
+                    <a
+                      href={course.videoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link link-primary"
+                    >
+                      Watch Video
+                    </a>
                   </td>
                   <td className="flex gap-2">
                     <button
@@ -85,7 +97,7 @@ const CoursesFormateur = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="text-center">
+                <td colSpan="7" className="text-center">
                   No courses available.
                 </td>
               </tr>

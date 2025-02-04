@@ -34,7 +34,11 @@ const menuItems = [
     icon: 'Shapes',
     href: '/competences',
   },
-
+  {
+    label: 'Quiz',
+    icon: 'MessageCircleQuestion',
+    href: '/quizzes',
+  },
   { type: 'divider' },
 
   // People & Groups
@@ -71,11 +75,6 @@ const menuItems = [
     label: 'Présence',
     icon: 'ClipboardCheck',
     href: '/attendance',
-  },
-  {
-    label: 'Quiz',
-    icon: 'MessageCircleQuestion',
-    href: '/quizzes',
   },
 
   { type: 'divider' },
