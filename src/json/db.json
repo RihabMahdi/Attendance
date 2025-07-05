@@ -2793,6 +2793,192 @@
           }
         }
       ]
+    },
+    {
+      "id": "8544",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-05-29",
+      "month": "May",
+      "registrationTime": "2025-05-29T09:50:54.277Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        },
+        {
+          "studentId": "2",
+          "studentCef": "10002",
+          "studentName": "Fatima Zahra Benhaddou",
+          "studentCin": "CS1002",
+          "absentHours": {
+            "8:30->10:50": false,
+            "10:50->13.30": true,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "29fa",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-05-29",
+      "month": "May",
+      "registrationTime": "2025-05-29T10:14:02.838Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "b151",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-06-13",
+      "month": "June",
+      "registrationTime": "2025-06-13T10:40:17.146Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false
+          }
+        },
+        {
+          "studentId": "2",
+          "studentCef": "10002",
+          "studentName": "Fatima Zahra Benhaddou",
+          "studentCin": "CS1002",
+          "absentHours": {
+            "8:30->10:50": false,
+            "10:50->13.30": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "5b47",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-06-13",
+      "month": "June",
+      "registrationTime": "2025-06-13T10:40:38.210Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "6880",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-06-13",
+      "month": "June",
+      "registrationTime": "2025-06-13T10:41:44.954Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        },
+        {
+          "studentId": "2",
+          "studentCef": "10002",
+          "studentName": "Fatima Zahra Benhaddou",
+          "studentCin": "CS1002",
+          "absentHours": {
+            "8:30->10:50": false,
+            "10:50->13.30": true,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "af43",
+      "niveau": "Specialisation",
+      "filiere": "Développement Web",
+      "annee": "1st Year",
+      "groupe": "Group 1",
+      "date": "2025-06-13",
+      "month": "June",
+      "registrationTime": "2025-06-13T10:42:24.309Z",
+      "students": [
+        {
+          "studentId": "1",
+          "studentCef": "10001",
+          "studentName": "Mohamed El Amrani",
+          "studentCin": "CS1001",
+          "absentHours": {
+            "8:30->10:50": true,
+            "10:50->13.30": false,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        },
+        {
+          "studentId": "2",
+          "studentCef": "10002",
+          "studentName": "Fatima Zahra Benhaddou",
+          "studentCin": "CS1002",
+          "absentHours": {
+            "8:30->10:50": false,
+            "10:50->13.30": true,
+            "13.30->15.50": false,
+            "15.50->18.30": false
+          }
+        }
+      ]
     }
   ],
   "studentDiscipline": [],

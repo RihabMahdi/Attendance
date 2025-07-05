@@ -1,0 +1,230 @@
+Système de Gestion des Présences - Fonctionnalités Détaillées
+
+## 1. Interface Formateur
+
+### 1.1 Gestion des Présences Journalières
+- **Sélection des Filtres**
+  - Secteur (liste déroulante)
+  - Niveau (dépendant du secteur)
+  - Filière (dépendant du niveau)
+  - Année (dépendant de la filière)
+  - Groupe (dépendant de l'année)
+  - Date (sélecteur de date)
+
+- **Créneaux Horaires** automatique + boutton cas de retard
+  - Matin :
+    - 8:30 -> 10:50
+    - 10:50 -> 13:30
+  - Après-midi :
+    - 13:30 -> 15:50
+    - 15:50 -> 18:30
+
+- **Marquage des Absences**
+  - Liste des étudiants avec :
+    - ID
+    - CEF
+    - Nom
+    - Prénom
+  - Cases à cocher par créneau
+  - Indication visuelle des absences
+  - Sauvegarde automatique
+
+### 1.2 Fonctionnalités Spécifiques
+- **Contrôle Temporel**
+  - Impossibilité de modifier les absences passées
+  - Mise à jour automatique des créneaux selon l'heure
+  - Validation des dates
+
+- **Sauvegarde des Données**
+  - Enregistrement automatique
+  - Confirmation de sauvegarde
+  - Gestion des erreurs
+
+## 2. Interface Administrateur
+
+### 2.1 Gestion des États
+
+#### 2.1.1 Vue Annuelle
+- **Statistiques Globales**
+  - Total des absences par étudiant
+  - Répartition AJ/ANJ
+  - Nombre de retards
+  - Sanctions appliquées
+
+- **Calculs Automatiques**
+  - Notes de discipline
+  - Sanctions cumulées
+  - Taux d'absence
+
+#### 2.1.2 Vue Mensuelle
+- **Filtrage par Mois**
+  - Sélection du mois
+  - Statistiques mensuelles
+  - Modifications des absences
+
+- **Données Mensuelles**
+  - Absences par jour
+  - Justificatifs mensuels
+  - Sanctions mensuelles
+
+#### 2.1.3 Vue Journalière
+- **Gestion des Absences**
+  - Modification des statuts (AJ/ANJ)
+  - Gestion des retards
+  - Historique des modifications
+
+- **Système d'Observations**
+  - Champ de texte pour observations
+  - Indication de déperdition
+  - Historique des observations
+  - Modification en temps réel
+
+### 2.2 Gestion de la Base de Données
+
+#### 2.2.1 Importation de la Base
+- **Système d'Importation Intelligent**
+  - Comparaison avec base existante
+  - Règles de traitement :
+    - Même CEF + Même Groupe = Pas d'ajout
+    - Même CEF + Groupe différent = Ajout nouveau avec mise à jour
+    - CEF inexistant = Marquage déperdition
+
+- **Validation des Données**
+  - Vérification des formats
+  - Détection des doublons
+  - Rapport d'importation
+
+#### 2.2.2 Gestion des Stagiaires
+- **Suivi des Stagiaires**
+  - Marquage des déperditions
+  - Historique des changements
+  - Observations personnalisées
+
+### 2.3 Système de Filtrage
+
+#### 2.3.1 Filtres de Base
+- Secteur
+- Niveau
+- Filière
+- Année
+- Groupe
+- CIN
+- CEF
+- Nom
+- Prénom
+- Date
+
+#### 2.3.2 Filtres Avancés
+- **Combinaisons Multiples**
+  - Filtres croisés
+  - Périodes personnalisées
+  - Types d'absence
+  - Statuts de sanction
+
+- **Filtres Spéciaux**
+  - Stagiaires en déperdition
+  - Stagiaires actifs
+  - Stagiaires avec observations
+
+### 2.4 Système de Sanctions
+
+#### 2.4.1 Calcul des Sanctions
+- **Échelle Progressive**
+  - 1-2 absences : Mise en garde
+  - 3-4 absences : Avertissement
+  - 5 absences : Blâme
+  - 6 absences : Exclusion 2 jours
+  - 7+ absences : Exclusion temporaire/définitive
+
+#### 2.4.2 Notes de Discipline
+- **Note d'Assiduité (SA)**
+  - Base : 10 points
+  - Déductions selon sanctions
+  - Calcul automatique
+
+- **Note de Comportement (SC)**
+  - Base : 5 points
+  - Déductions selon sanctions
+  - Calcul automatique
+
+### 2.5 Export des Données
+
+#### 2.5.1 Export PDF
+- **Contenu du Rapport**
+  - Informations étudiant
+  - Statistiques d'absence
+  - Sanctions appliquées
+  - Notes de discipline
+  - Observations
+  - Statut de déperdition
+
+#### 2.5.2 Export Excel
+- **Format CSV**
+  - Données complètes
+  - Filtrage personnalisé
+  - Formatage adapté
+  - Compatibilité Excel
+
+### 2.6 Interface Utilisateur
+
+#### 2.6.1 Tableau de Bord
+- **Vue d'Ensemble**
+  - Statistiques globales
+  - Alertes et notifications
+  - Accès rapide
+  - Indicateurs de performance
+
+#### 2.6.2 Tableaux de Données
+- **Fonctionnalités**
+  - Pagination
+  - Tri des colonnes
+  - Recherche rapide
+  - Affichage personnalisé
+
+### 2.7 Sécurité et Validation
+
+#### 2.7.1 Contrôles d'Accès
+- **Sécurité**
+  - Vérification des rôles
+  - Traçabilité des actions
+  - Journal des modifications
+  - Protection des données
+
+#### 2.7.2 Validation des Actions
+- **Contrôles**
+  - Confirmation des modifications
+  - Vérification des données
+  - Protection contre les erreurs
+  - Sauvegarde automatique
+
+### 2.8 Gestion des Documents
+
+#### 2.8.1 Justificatifs
+- **Fonctionnalités**
+  - Upload de documents
+  - Association aux absences
+  - Stockage sécurisé
+  - Gestion des versions
+
+#### 2.8.2 Rapports
+- **Types de Rapports**
+  - Rapports standard
+  - Rapports personnalisés
+  - Rapports de déperdition
+  - Statistiques avancées
+
+### 2.9 Support et Maintenance
+
+#### 2.9.1 Documentation
+- **Ressources**
+  - Guide d'utilisation
+  - FAQ
+  - Support technique
+  - Tutoriels
+
+#### 2.9.2 Maintenance
+- **Opérations**
+  - Mise à jour des données
+  - Nettoyage des archives
+  - Optimisation des performances
+  - Sauvegarde des données

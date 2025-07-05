@@ -26,7 +26,7 @@ function AttendancePage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mt-5">Gestion d'Absence</h1>
+      <h1 className="text-3xl font-bold text-center mt-5">GESTION D'ABSENCE</h1>
 
       {currentUser.role === 'admin' || currentUser.role === 'super user' ? (
         <AttendanceAdmin />
